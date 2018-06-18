@@ -13,6 +13,7 @@ public class GameWindow extends JFrame {
 
     GameCanvas gameCanvas;
     long lastTime = 0;
+    String enemyDirection = "upward";
 
     public GameWindow() {
         //Set up sizes
@@ -66,7 +67,7 @@ public class GameWindow extends JFrame {
                 this.gameCanvas.positionXStar -= 3;
 
                 //Move the enemy
-                this.gameCanvas.positionYEnemy -= 4;
+                enemyMove();
 
                 //Move the player
                 //this.gameCanvas.positionXPlayer -= 4;
@@ -74,6 +75,45 @@ public class GameWindow extends JFrame {
                 this.gameCanvas.renderAll();
                 this.lastTime = currTime;
             }
+        }
+    }
+
+    /**
+     * Enemy Move Diagonally
+     * Its location are accordingly substracted
+     */
+    public void enemyMoveDiagonal() {
+        this.gameCanvas.positionXEnemy -= 3;
+        this.gameCanvas.positionYEnemy -= 3;
+    }
+
+    /**
+     * Enemy reverses when it hit the wall
+     * Its locations are accordingly added
+     */
+    public void enemyMoveReverseDiagonal() {
+        this.gameCanvas.positionXEnemy += 3;
+        this.gameCanvas.positionYEnemy += 3;
+    }
+
+    public void enemyMove() {
+        if (this.gameCanvas.positionXEnemy > 1024 || this.gameCanvas.positionYEnemy > 600) {
+            enemyMoveDiagonal();
+            enemyDirection = "upward";
+        }
+
+        if (this.gameCanvas.positionXEnemy < 0 || this.gameCanvas.positionYEnemy < 0) {
+            enemyMoveReverseDiagonal();
+            enemyDirection = "downward";
+        }
+
+        switch(enemyDirection) {
+            case "downward":
+                enemyMoveReverseDiagonal();
+                break;
+            case "upward":
+                enemyMoveDiagonal();
+                break;
         }
     }
 }

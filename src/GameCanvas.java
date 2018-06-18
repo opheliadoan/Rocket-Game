@@ -19,8 +19,8 @@ public class GameCanvas extends JPanel {
     public int positionXStar = 400;
     public int positionYStar = 150;
 
-    public int positionXEnemy = 600;
-    public int positionYEnemy = 200;
+    public int positionXEnemy = 1000; //col
+    public int positionYEnemy = 500;  //row
 
     public int positionXPlayer = 500;
     public int positionYPlayer = 300;
