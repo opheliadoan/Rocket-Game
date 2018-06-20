@@ -1,6 +1,7 @@
 /**
  * Name: Ophelia Doan
  * Date: 170618
+ * 923
  */
 
 import javax.swing.*;
@@ -8,12 +9,15 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.Random;
 
 public class GameWindow extends JFrame {
 
     GameCanvas gameCanvas;
     long lastTime = 0;
     String enemyDirection = "upward";
+    //Create Random number
+    Random random = new Random();
 
     public GameWindow() {
         //Set up sizes
@@ -31,11 +35,20 @@ public class GameWindow extends JFrame {
 
             @Override
             public void keyPressed(KeyEvent e) {
-                if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-                    gameCanvas.positionXPlayer -= 8;
-                }
-                if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-                    gameCanvas.positionXPlayer += 8;
+
+                if (e.getKeyCode() == KeyEvent.VK_LEFT && gameCanvas.positionXPlayer < 0) {
+                    gameCanvas.positionYPlayer = random.nextInt(601);
+                    gameCanvas.positionXPlayer = 1023;
+                } else if (e.getKeyCode() == KeyEvent.VK_RIGHT && gameCanvas.positionXPlayer > 1024) {
+                    gameCanvas.positionYPlayer = random.nextInt(601);
+                    gameCanvas.positionXPlayer = 1;
+                } else {
+                    if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+                        gameCanvas.positionXPlayer -= 8;
+                    }
+                    if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+                        gameCanvas.positionXPlayer += 8;
+                    }
                 }
             }
 
@@ -63,14 +76,25 @@ public class GameWindow extends JFrame {
             //unix time
             long currTime = System.nanoTime();
             if (currTime - this.lastTime >= 17_000_000) {
-                //Move the star
-                this.gameCanvas.positionXStar -= 3;
+                //Move the stars
+                this.gameCanvas.positionXStar1 -= random.nextInt(20);
+
+                this.gameCanvas.positionXStar2 -= random.nextInt(20);
+
+                this.gameCanvas.positionXStar3 -= random.nextInt(20);
+
+                this.gameCanvas.positionXStar4 -= random.nextInt(20);
+
+                this.gameCanvas.positionXStar5 -= random.nextInt(20);
+
+                this.gameCanvas.positionXStar6 -= random.nextInt(20);
+
+                this.gameCanvas.positionXStar7 -= random.nextInt(20);
+
+                this.gameCanvas.positionXStar8 -= random.nextInt(20);
 
                 //Move the enemy
                 enemyMove();
-
-                //Move the player
-                //this.gameCanvas.positionXPlayer -= 4;
 
                 this.gameCanvas.renderAll();
                 this.lastTime = currTime;
