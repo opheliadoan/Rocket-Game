@@ -26,7 +26,7 @@ public class GameCanvas extends JPanel {
 
     public ArrayList<Integer> listXStar = new ArrayList<>();
     public ArrayList<Integer> listYStar = new ArrayList<>();
-    public ArrayList<Integer> listSpeedStar = new ArrayList<>();
+    public ArrayList<Integer> listSpeedStar = new ArrayList<Integer>();
 
 
     public int positionXEnemy = 1000; //col
@@ -78,7 +78,7 @@ public class GameCanvas extends JPanel {
         for(int i = 0; i < 8; i++) {
             listXStar.add(rand.nextInt(1024));
             listYStar.add(rand.nextInt(600));
-            listSpeedStar.add(rand.nextInt(15) + 1);
+            listSpeedStar.add(rand.nextInt(15));
         }
     }
 
