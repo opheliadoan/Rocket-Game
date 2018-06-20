@@ -24,29 +24,9 @@ public class GameCanvas extends JPanel {
     BufferedImage backBuffered;
     Graphics graphics;
 
-    public int positionXStar1 = rand.nextInt(1024);
-    public int positionYStar1 = rand.nextInt(600);
-
-    public int positionXStar2 = rand.nextInt(1024);
-    public int positionYStar2 = rand.nextInt(600);
-
-    public int positionXStar3 = rand.nextInt(1024);
-    public int positionYStar3 = rand.nextInt(600);
-
-    public int positionXStar4 = rand.nextInt(1024);
-    public int positionYStar4 = rand.nextInt(600);
-
-    public int positionXStar5 = rand.nextInt(1024);
-    public int positionYStar5 = rand.nextInt(600);
-
-    public int positionXStar6 = rand.nextInt(1024);
-    public int positionYStar6 = rand.nextInt(600);
-
-    public int positionXStar7 = rand.nextInt(1024);
-    public int positionYStar7 = rand.nextInt(600);
-
-    public int positionXStar8 = rand.nextInt(1024);
-    public int positionYStar8 = rand.nextInt(600);
+    public ArrayList<Integer> listXStar = new ArrayList<>();
+    public ArrayList<Integer> listYStar = new ArrayList<>();
+    public ArrayList<Integer> listSpeedStar = new ArrayList<>();
 
 
     public int positionXEnemy = 1000; //col
@@ -93,43 +73,13 @@ public class GameCanvas extends JPanel {
 
     }
 
-    //Get the random positions of the star
+    //Get the random positions of eight stars
     public void setPositionStar() {
-//        ArrayList<Point> list = new ArrayList<>();
-//                  for (int i = 0; i < 600; i++) {
-//                      for (int j = 0; j < 1024; j++) {
-//                          list.add(new Point(i, j));
-//                      }
-//                  }
-//
-//                  Point point = list.remove(rand.nextInt(list.size()));
-//                  this.positionXStar1 = point.y;
-//                  this.positionYStar1 = point.x;
-//
-//                  point = list.remove(rand.nextInt(list.size()));
-//                  this.positionXStar2 = point.y;
-//                  this.positionYStar2 = point.x;
-//
-//                  point = list.remove(rand.nextInt(list.size()));
-//                  this.positionXStar3 = point.y;
-//                  this.positionYStar3 = point.x;
-
-
-
-//          this.positionXStar1 = rand.nextInt(1024);
-//                  this.positionYStar1 = rand.nextInt(600);
-//
-//                  do {
-//                      this.positionXStar2 = rand.nextInt(1024);
-//                      this.positionYStar2 = rand.nextInt(600);
-//                  } while (this.positionXStar2 == this.positionXStar1 && this.positionYStar2 == this.positionYStar1);
-//
-//                  do {
-//                      this.positionXStar3 = rand.nextInt(1024);
-//                      this.positionYStar3 = rand.nextInt(600);
-//                  } while ((this.positionXStar3 == this.positionXStar1 && this.positionYStar3 == this.positionYStar1)
-//                          || (this.positionXStar3 == this.positionXStar2 && this.positionYStar3 == this.positionYStar2));
-
+        for(int i = 0; i < 8; i++) {
+            listXStar.add(rand.nextInt(1024));
+            listYStar.add(rand.nextInt(600));
+            listSpeedStar.add(rand.nextInt(15) + 1);
+        }
     }
 
     public void renderAll() {
@@ -144,14 +94,9 @@ public class GameCanvas extends JPanel {
         setPositionStar();
 
         //Add the details
-        this.graphics.drawImage(this.starImage, this.positionXStar1, this.positionYStar1, 5, 5,null);
-        this.graphics.drawImage(this.starImage, this.positionXStar2, this.positionYStar2, 5, 5,null);
-        this.graphics.drawImage(this.starImage, this.positionXStar3, this.positionYStar3, 5, 5,null);
-        this.graphics.drawImage(this.starImage, this.positionXStar4, this.positionYStar4, 5, 5,null);
-        this.graphics.drawImage(this.starImage, this.positionXStar5, this.positionYStar5, 5, 5,null);
-        this.graphics.drawImage(this.starImage, this.positionXStar6, this.positionYStar6, 5, 5,null);
-        this.graphics.drawImage(this.starImage, this.positionXStar7, this.positionYStar7, 5, 5,null);
-        this.graphics.drawImage(this.starImage, this.positionXStar8, this.positionYStar8, 5, 5,null);
+        for(int i = 0; i < 8; i++) {
+            this.graphics.drawImage(this.starImage, this.listXStar.get(i), this.listYStar.get(i), 5, 5, null);
+        }
 
         this.graphics.drawImage(this.enemyImage, this.positionXEnemy, this.positionYEnemy, 20, 20, null);
         this.graphics.drawImage(this.playerImage, this.positionXPlayer, this.positionYPlayer, 20, 20, null);

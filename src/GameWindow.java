@@ -9,6 +9,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.ArrayList;
 import java.util.Random;
 
 public class GameWindow extends JFrame {
@@ -18,6 +19,7 @@ public class GameWindow extends JFrame {
     String enemyDirection = "upward";
     //Create Random number
     Random random = new Random();
+
 
     public GameWindow() {
         //Set up sizes
@@ -72,26 +74,26 @@ public class GameWindow extends JFrame {
     //Make the imgaes of thebackground move
     //Delay the speed of the star so it is visible
     public void gameLoop() {
+
         while(true) {
             //unix time
             long currTime = System.nanoTime();
             if (currTime - this.lastTime >= 17_000_000) {
                 //Move the stars
-                this.gameCanvas.positionXStar1 -= random.nextInt(20);
+                for(int i = 0; i < this.gameCanvas.listXStar.size(); i++) {
+                    int currPosXStar = this.gameCanvas.listXStar.get(i) - this.gameCanvas.listSpeedStar.get(i);
 
-                this.gameCanvas.positionXStar2 -= random.nextInt(20);
+                    //if currPosXStar < 0, the position of the star is updated
+                    //and start moving from the rightmost
+                    //currPosXStar = 1023
+                    if (currPosXStar < 0) {
+                        this.gameCanvas.listXStar.set(i, 1024);
+                        this.gameCanvas.listYStar.set(i, random.nextInt(600));
+                    } else {
+                        this.gameCanvas.listXStar.set(i, currPosXStar);
+                    }
 
-                this.gameCanvas.positionXStar3 -= random.nextInt(20);
-
-                this.gameCanvas.positionXStar4 -= random.nextInt(20);
-
-                this.gameCanvas.positionXStar5 -= random.nextInt(20);
-
-                this.gameCanvas.positionXStar6 -= random.nextInt(20);
-
-                this.gameCanvas.positionXStar7 -= random.nextInt(20);
-
-                this.gameCanvas.positionXStar8 -= random.nextInt(20);
+                }
 
                 //Move the enemy
                 enemyMove();
