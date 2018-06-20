@@ -9,6 +9,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.ArrayList;
 import java.util.Random;
 
 public class GameWindow extends JFrame {
@@ -18,6 +19,7 @@ public class GameWindow extends JFrame {
     String enemyDirection = "upward";
     //Create Random number
     Random random = new Random();
+    public ArrayList<Integer> listSpeedStar = new ArrayList<Integer>();
 
 
     public GameWindow() {
@@ -79,19 +81,16 @@ public class GameWindow extends JFrame {
             long currTime = System.nanoTime();
             if (currTime - this.lastTime >= 17_000_000) {
                 //Move the stars
+                //They will reappear randomly at the opposite site
                 for(int i = 0; i < this.gameCanvas.listXStar.size(); i++) {
-                    int currPosXStar = this.gameCanvas.listXStar.get(i) - this.gameCanvas.listSpeedStar.get(i);
-
-                    //if currPosXStar < 0, the position of the star is updated
-                    //and start moving from the rightmost
-                    //currPosXStar = 1023
+                    listSpeedStar.add(random.nextInt(15));
+                    int currPosXStar = this.gameCanvas.listXStar.get(i) - listSpeedStar.get(i);
                     if (currPosXStar < 0) {
                         this.gameCanvas.listXStar.set(i, 1024);
                         this.gameCanvas.listYStar.set(i, random.nextInt(600));
                     } else {
                         this.gameCanvas.listXStar.set(i, currPosXStar);
                     }
-
                 }
 
                 //Move the enemy
