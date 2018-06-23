@@ -52,10 +52,8 @@ public class GameCanvas extends JPanel {
         this.stars = new ArrayList<>();
         this.enemies = new ArrayList<>();
         this.triangularPlayer = new TriangularPlayer();
-
 //        this.enemyImage = this.loadImage();
         this.createPlayer();
-//        this.createTriangularPlayer();
     }
 
     @Override

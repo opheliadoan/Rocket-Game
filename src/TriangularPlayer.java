@@ -11,4 +11,5 @@ public class TriangularPlayer {
         graphics.setColor(Color.GREEN);
         graphics.drawPolygon(xPoints, yPoints, 3);
     }
+
 }

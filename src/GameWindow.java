@@ -38,9 +38,19 @@ public class GameWindow extends JFrame {
             public void keyPressed(KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_LEFT) {
                     gameCanvas.player.positionXPlayer -= 8;
+
+                    for (int i = 0; i < 3; i++) {
+                        gameCanvas.triangularPlayer.xPoints[i] -= 8;
+
+                    }
                 }
                 if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
                     gameCanvas.player.positionXPlayer += 8;
+
+                    for (int i = 0; i < 3; i++) {
+                        gameCanvas.triangularPlayer.xPoints[i] += 8;
+
+                    }
                 }
                 gameCanvas.player.positionXPlayer = gameCanvas.player.relocateXPlayer();
             }
