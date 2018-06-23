@@ -1,7 +1,8 @@
 /**
- * Name: Doan Phuong Anh
- * Date: 170618
+ * SOLID Principles: https://scotch.io/bar-talk/s-o-l-i-d-the-first-five-principles-of-object-oriented-design
  */
+
+
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -10,98 +11,121 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
-//Used to add details to the window
 public class GameCanvas extends JPanel {
 
-    BufferedImage starImage;
-    BufferedImage enemyImage;
-    BufferedImage playerImage;
-    Random rand = new Random();
 
     //BackBuffered
     BufferedImage backBuffered;
     Graphics graphics;
 
-    public ArrayList<Integer> listXStar = new ArrayList<>();
-    public ArrayList<Integer> listYStar = new ArrayList<>();
-//    public ArrayList<Integer> listSpeedStar = new ArrayList<Integer>();
+    List<Star> stars;
+    List<Enemy> enemies;
+    Player player;
+    TriangularPlayer triangularPlayer;
 
 
-    public int positionXEnemy = 1000; //col
-    public int positionYEnemy = 500;  //row
 
-    public int positionXPlayer = 500;
-    public int positionYPlayer = 300;
+
+    private Random random = new Random();
+    private int count = 0;
+
 
     public GameCanvas() {
-        //Set up the Canvas
         this.setSize(1024, 600);
 
-        this.backBuffered = new BufferedImage(1024, 600, BufferedImage.TYPE_4BYTE_ABGR);
-        //get the graphics from the backBuffered
-        this.graphics = this.backBuffered.getGraphics();
+        this.setupBackBuffered();
 
-        //Load the star image
-        try {
-            this.starImage = ImageIO.read(new File("resources/images/star.png"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        try {
-            this.enemyImage = ImageIO.read(new File("resources/images/circle.png"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        try {
-            this.playerImage = ImageIO.read(new File("resources/images/circle.png"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
+        this.setupCharacter();
 
         this.setVisible(true);
     }
 
-    @Override
-    protected void paintComponent(Graphics g) {
-        //Draw the images on the backBuffered
-        g.drawImage(this.backBuffered, 0, 0,null);
-
+    private void setupBackBuffered() {
+        this.backBuffered = new BufferedImage(1024, 600, BufferedImage.TYPE_4BYTE_ABGR);
+        this.graphics = this.backBuffered.getGraphics();
     }
 
-    //Get the random positions of eight stars
-    public void setPositionStar() {
-        for(int i = 0; i < 8; i++) {
-            listXStar.add(rand.nextInt(1024));
-            listYStar.add(rand.nextInt(600));
-//            listSpeedStar.add(rand.nextInt(15));
-        }
+    private void setupCharacter() {
+        this.stars = new ArrayList<>();
+        this.enemies = new ArrayList<>();
+        this.triangularPlayer = new TriangularPlayer();
+
+//        this.enemyImage = this.loadImage();
+        this.createPlayer();
+//        this.createTriangularPlayer();
+    }
+
+    @Override
+    protected void paintComponent(Graphics g) {
+        g.drawImage(this.backBuffered, 0, 0, null);
     }
 
     public void renderAll() {
-        //super.paintComponent(g);
-        //Color color = new Color(): according to RB
-
-        //Draw the background
         this.graphics.setColor(Color.BLACK);
-        //draw a rectangular
-        this.graphics.fillRect(0,0,1024,600);
+        this.graphics.fillRect(0, 0, 1024, 600);
 
-        setPositionStar();
+        this.stars.forEach(star -> star.render(graphics));
+//        this.star.render(this.graphics);
 
-        //Add the details
-        for(int i = 0; i < 8; i++) {
-            this.graphics.drawImage(this.starImage, this.listXStar.get(i), this.listYStar.get(i), 5, 5, null);
-        }
+        this.enemies.forEach(enemy -> enemy.renderEnemy(graphics));
 
-        this.graphics.drawImage(this.enemyImage, this.positionXEnemy, this.positionYEnemy, 20, 20, null);
-        this.graphics.drawImage(this.playerImage, this.positionXPlayer, this.positionYPlayer, 20, 20, null);
+        this.player.renderPlayer(graphics);
+
+        this.triangularPlayer.renderTriangularPlayer(graphics);
 
         this.repaint();
     }
 
+    public void runAll() {
+        this.createStar();
+        this.stars.forEach(star -> star.run());
+//        this.star.run();
+        this.createEnemy();
+        this.enemies.forEach(enemy -> enemy.runEnemy());
+    }
+
+    private void createStar() {
+
+        if (this.count == 10) {
+            Star star = new Star(1024, this.random.nextInt(600),
+                    this.loadImage("resources/images/star.png"),
+                    -this.random.nextInt(5) +1, 0);
+            this.stars.add(star);
+            this.count = 0;
+        } else {
+            this.count += 1;
+        }
+    }
+
+    private void createEnemy() {
+        if (this.count == 100) {
+            Enemy enemy = new Enemy(this.random.nextInt(1024), this.random.nextInt(600),
+                    this.loadImage("resources/images/circle.png"),
+                    -this.random.nextInt(10) + 1, -this.random.nextInt(10) + 1);
+            this.enemies.add(enemy);
+            this.count = 0;
+        } else {
+            this.count += 1;
+        }
+    }
+
+    public void createPlayer() {
+        this.player = new Player(this.random.nextInt(1024), this.random.nextInt(600),
+                this.loadImage("resources/images/circle.png"));
+    }
+
+    private BufferedImage loadImage(String path) {
+        try {
+            return ImageIO.read(new File(path));
+        } catch (IOException e) {
+            return null;
+        }
+    }
+
+//    public void createTriangularPlayer() {
+//        this.triangularPlayer = new TriangularPlayer(this.random.nextInt(1024), this.random.nextInt(600));
+//    }
 }
