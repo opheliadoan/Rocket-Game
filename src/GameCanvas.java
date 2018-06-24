@@ -25,8 +25,7 @@ public class GameCanvas extends JPanel {
     List<Enemy> enemies;
     Player player;
     TriangularPlayer triangularPlayer;
-
-
+    Background background;
 
 
     private Random random = new Random();
@@ -44,6 +43,7 @@ public class GameCanvas extends JPanel {
     }
 
     private void setupBackBuffered() {
+        this.background = new Background();
         this.backBuffered = new BufferedImage(1024, 600, BufferedImage.TYPE_4BYTE_ABGR);
         this.graphics = this.backBuffered.getGraphics();
     }
@@ -62,8 +62,7 @@ public class GameCanvas extends JPanel {
     }
 
     public void renderAll() {
-        this.graphics.setColor(Color.BLACK);
-        this.graphics.fillRect(0, 0, 1024, 600);
+       this.background.render(graphics);
 
         this.stars.forEach(star -> star.render(graphics));
 //        this.star.render(this.graphics);
@@ -82,7 +81,7 @@ public class GameCanvas extends JPanel {
         this.stars.forEach(star -> star.run());
 //        this.star.run();
         this.createEnemy();
-        this.enemies.forEach(enemy -> enemy.runEnemy());
+        this.enemies.forEach(enemy -> enemy.runEnemy(this.player.positionXPlayer, this.player.positionYPlayer));
     }
 
     private void createStar() {

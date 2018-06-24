@@ -8,8 +8,8 @@ public class Enemy {
     public BufferedImage image;
     public int speedXEnemy;
     public int speedYEnemy;
-    public int velocityXEnemy;
-    public int velocityYEnemy;
+    public float difXEnemy;
+    public float difYEnemy;
 
     public Enemy(int positionXEnemy, int positionYEnemy, BufferedImage image, int speedXEnemy, int speedYEnemy) {
         this.positionXEnemy = positionXEnemy;
@@ -25,37 +25,29 @@ public class Enemy {
     }
 
 //    public void runEnemy(int xPlayer, int yPlayer) {
-//        velocityXEnemy = xPlayer - this.positionXEnemy;
-//        velocityYEnemy = yPlayer - this.positionYEnemy;
-//        double norm = Math.sqrt(velocityXEnemy*velocityXEnemy + velocityYEnemy*velocityYEnemy);
+//        difXEnemy = (float) (xPlayer - this.positionXEnemy);
+//        difYEnemy = (float) (yPlayer - this.positionYEnemy);
+//        float norm = Math.sqrt(difXEnemy*difXEnemy + difYEnemy*difYEnemy);
 //
 //        if(norm == 0) {
 //            //Player and Enemy meet
 //            System.out.println("Game Over");
 //        } else {
-//            velocityXEnemy *= this.speedXEnemy/norm;
-//            velocityYEnemy *= this.speedYEnemy/norm;
+//            this.positionXEnemy += this.difXEnemy/norm;
+//            this.positionYEnemy += this.difYEnemy/norm;
 //        }
-//
-//        this.positionXEnemy += velocityXEnemy;
-//        this.positionYEnemy += velocityYEnemy;
-//
-//        if (this.positionXEnemy < 0 || this.positionXEnemy > 1024 - 40)
-//            this.velocityXEnemy = -this.velocityYEnemy;
-//
-//        if (this.positionYEnemy < 0 || this.positionYEnemy > 600 - 40)
-//            this.velocityYEnemy = -this.velocityXEnemy;
 //    }
 
-    public void runEnemy() {
-        this.positionXEnemy += this.speedXEnemy;
-        this.positionYEnemy += this.speedYEnemy;
-
-        if (this.positionXEnemy < 0 || this.positionXEnemy > 1024 - 20)
-            this.speedXEnemy = -this.speedXEnemy;
-
-        if (this.positionYEnemy < 0 || this.positionYEnemy > 600 - 20)
-            this.speedYEnemy = -this.speedYEnemy;
-    }
+    //Ver1
+//    public void runEnemy() {
+//        this.positionXEnemy += this.speedXEnemy;
+//        this.positionYEnemy += this.speedYEnemy;
+//
+//        if (this.positionXEnemy < 0 || this.positionXEnemy > 1024 - 20)
+//            this.speedXEnemy = -this.speedXEnemy;
+//
+//        if (this.positionYEnemy < 0 || this.positionYEnemy > 600 - 20)
+//            this.speedYEnemy = -this.speedYEnemy;
+//    }
 
 }
