@@ -1,5 +1,6 @@
 import java.awt.*;
 //import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -32,7 +33,15 @@ public class Player {
 
         Vector2D translation = this.position.subtract(center);
 
-        this.vertices.forEach(vertex -> polygon.addPoint((int)vertex.x, (int)vertex.y));
+//        List<Vector2D> list = new ArrayList<>();
+//        this.vertices.forEach(vertex -> list.add(vertex.add(translation)));
+        this.vertices.
+                stream()
+                .map(vertex -> vertex.add(translation))
+                .forEach(vertex -> polygon.addPoint((int)vertex.x, (int)vertex.y));  //map creates a new list, then goes thru the original
+                                                                        // list and return the final to the new list
+
+
 
         graphics.setColor(Color.GREEN);
         graphics.fillPolygon(polygon);
