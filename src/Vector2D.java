@@ -66,8 +66,7 @@ public class Vector2D {
     }
 
     public float length() {
-        float length = (float) Math.sqrt(this.x*this.x + this.y*this.y);
-        return length;
+        return (float) Math.sqrt((this.x * this.x) + (this.y * this.y));
     }
 
     public Vector2D copy() {
@@ -79,8 +78,10 @@ public class Vector2D {
     }
 
     public Vector2D rotate(double angle) {
-        float rotateX = (float) ((this.x * Math.cos(angle)) - (this.y * Math.sin(angle)));
-        float rotateY = (float) ((this.x * Math.sin(angle)) + (this.y * Math.cos(angle)));
-        return new Vector2D(rotateX, rotateY);
+        double radians = Math.toRadians(angle);
+        float cos = (float)Math.cos(radians);
+        float sin = (float)Math.sin(radians);
+
+        return new Vector2D(this.x * cos - this.y * sin, this.x * sin + this.y * cos);
     }
 }

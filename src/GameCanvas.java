@@ -22,9 +22,10 @@ public class GameCanvas extends JPanel {
     Graphics graphics;
 
     List<Star> stars;
-    List<Enemy> enemies;
-    Player player;
-    TriangularPlayer triangularPlayer;
+    public Player player = new Player();
+    public Enemy enemy = new Enemy();
+
+//    TriangularPlayer triangularPlayer;
     Background background;
 
 
@@ -50,11 +51,23 @@ public class GameCanvas extends JPanel {
 
     private void setupCharacter() {
         this.stars = new ArrayList<>();
-        this.enemies = new ArrayList<>();
-        this.triangularPlayer = new TriangularPlayer();
+       this.setUpPlayer();
+       this.setUpEnemy();
+//        this.triangularPlayer = new TriangularPlayer();
 //        this.enemyImage = this.loadImage();
-        this.createPlayer();
+
     }
+
+    private void setUpPlayer() {
+        this.player.position.set(100, 200);
+//        this.player.image = this.loadImage("resources/images/circle.png");
+    }
+
+    private void setUpEnemy() {
+        this.enemy.position.set(800, 400);
+        this.enemy.image = this.loadImage("resources/images/circle.png");
+    }
+
 
     @Override
     protected void paintComponent(Graphics g) {
@@ -67,11 +80,10 @@ public class GameCanvas extends JPanel {
         this.stars.forEach(star -> star.render(graphics));
 //        this.star.render(this.graphics);
 
-        this.enemies.forEach(enemy -> enemy.renderEnemy(graphics));
-
         this.player.renderPlayer(graphics);
+        this.enemy.renderEnemy(graphics);
 
-        this.triangularPlayer.renderTriangularPlayer(graphics);
+//        this.triangularPlayer.renderTriangularPlayer(graphics);
 
         this.repaint();
     }
@@ -80,8 +92,16 @@ public class GameCanvas extends JPanel {
         this.createStar();
         this.stars.forEach(star -> star.run());
 //        this.star.run();
-        this.createEnemy();
-        this.enemies.forEach(enemy -> enemy.runEnemy(this.player.positionXPlayer, this.player.positionYPlayer));
+
+        this.runEnemy();
+    }
+
+    private void runEnemy() {
+        Vector2D velocity = this.player.position
+                .subtract(this.enemy.position)
+                .normalize().multiply(1.5f);
+        this.enemy.velocity.set(velocity);
+        this.enemy.run();
     }
 
     private void createStar() {
@@ -97,22 +117,22 @@ public class GameCanvas extends JPanel {
         }
     }
 
-    private void createEnemy() {
-        if (this.count == 100) {
-            Enemy enemy = new Enemy(this.random.nextInt(1024), this.random.nextInt(600),
-                    this.loadImage("resources/images/circle.png"),
-                    -this.random.nextInt(10) + 1, -this.random.nextInt(10) + 1);
-            this.enemies.add(enemy);
-            this.count = 0;
-        } else {
-            this.count += 1;
-        }
-    }
-
-    public void createPlayer() {
-        this.player = new Player(this.random.nextInt(1024), this.random.nextInt(600),
-                this.loadImage("resources/images/circle.png"));
-    }
+////    private void createEnemy() {
+////        if (this.count == 100) {
+////            Enemy enemy = new Enemy(this.random.nextInt(1024), this.random.nextInt(600),
+////                    this.loadImage("resources/images/circle.png"),
+////                    -this.random.nextInt(10) + 1, -this.random.nextInt(10) + 1);
+////            this.enemies.add(enemy);
+////            this.count = 0;
+////        } else {
+////            this.count += 1;
+////        }
+////    }
+//
+//    public void createPlayer() {
+//        this.player = new Player(this.random.nextInt(1024), this.random.nextInt(600),
+//                this.loadImage("resources/images/circle.png"));
+//    }
 
     private BufferedImage loadImage(String path) {
         try {

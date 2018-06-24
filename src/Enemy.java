@@ -3,40 +3,26 @@ import java.awt.image.BufferedImage;
 
 public class Enemy {
 
-    public int positionXEnemy;
-    public int positionYEnemy;
+    public Vector2D position;
     public BufferedImage image;
-    public int speedXEnemy;
-    public int speedYEnemy;
-    public float difXEnemy;
-    public float difYEnemy;
+    public Vector2D velocity;
 
-    public Enemy(int positionXEnemy, int positionYEnemy, BufferedImage image, int speedXEnemy, int speedYEnemy) {
-        this.positionXEnemy = positionXEnemy;
-        this.positionYEnemy = positionYEnemy;
-        this.image = image;
-        this.speedXEnemy = speedXEnemy;
-        this.speedYEnemy = speedYEnemy;
+    public Enemy() {
+        this.position = new Vector2D();
+        this.velocity = new Vector2D();
     }
 
+
+
     public void renderEnemy(Graphics graphics) {
-        graphics.drawImage(image, this.positionXEnemy, this.positionYEnemy,
+        graphics.drawImage(image, (int)this.position.x, (int)this.position.y,
                 20, 20, null);
     }
 
-//    public void runEnemy(int xPlayer, int yPlayer) {
-//        difXEnemy = (float) (xPlayer - this.positionXEnemy);
-//        difYEnemy = (float) (yPlayer - this.positionYEnemy);
-//        float norm = Math.sqrt(difXEnemy*difXEnemy + difYEnemy*difYEnemy);
-//
-//        if(norm == 0) {
-//            //Player and Enemy meet
-//            System.out.println("Game Over");
-//        } else {
-//            this.positionXEnemy += this.difXEnemy/norm;
-//            this.positionYEnemy += this.difYEnemy/norm;
-//        }
-//    }
+    //Ver2
+    public void run() {
+        this.position.addUp(this.velocity);
+    }
 
     //Ver1
 //    public void runEnemy() {

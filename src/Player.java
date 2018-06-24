@@ -1,41 +1,59 @@
 import java.awt.*;
-import java.awt.image.BufferedImage;
-
+//import java.awt.image.BufferedImage;
+import java.util.Arrays;
+import java.util.List;
 
 
 public class Player {
 
-    public int positionXPlayer;
-    public int positionYPlayer;
-    public BufferedImage image;
+    public Vector2D position;
+    private List<Vector2D> vertices;
+    private Polygon polygon;
 
 
-    public Player(){}
-
-    public Player(int positionXPlayer, int positionYPlayer, BufferedImage image) {
-        this.positionXPlayer = positionXPlayer;
-        this.positionYPlayer = positionYPlayer;
-        this.image = image;
-
+    public Player() {
+        this.position = new Vector2D();
+        this.vertices = Arrays.asList(
+                new Vector2D(),
+                new Vector2D(0, 16),
+                new Vector2D(20, 8)
+        );
+        this.polygon = new Polygon();
     }
 
 
     public void renderPlayer(Graphics graphics) {
+        this.polygon.reset();
 
-        graphics.drawImage(image, this.positionXPlayer, this.positionYPlayer,
-                30, 30, null);
+        Vector2D center = this.vertices
+                .stream()
+                .reduce(new Vector2D(), (v1, v2) -> v1.add(v2))  //v1 = first element of the list, v2 moves from the second, return v1 to Vector2D
+                .multiply(1/this.vertices.size());
+
+        Vector2D translation = this.position.subtract(center);
+
+        this.vertices.forEach(vertex -> polygon.addPoint((int)vertex.x, (int)vertex.y));
+
+        graphics.setColor(Color.GREEN);
+        graphics.fillPolygon(polygon);
+//Ver1
+//        graphics.drawImage(image, (int)this.position.x, (int)this.position.y,
+//                30, 30, null);
 
     }
 
-    public int relocateXPlayer() {
-        if(this.positionXPlayer < 0) {
-            return 1023;
-        }
+    public void runPlayer(){}
 
-        if(this.positionXPlayer > 1024) {
-            return 0;
-        }
-
-        return positionXPlayer;
-    }
+//    //Ver1
+//    public int relocateXPlayer() {
+//        if(this.position.x < 0) {
+//            return 1023;
+//        }
+//
+//        if(this.position.x > 1024) {
+//            return 0;
+//        }
+//
+//        return (int)this.position.x;
+//    }
 }
