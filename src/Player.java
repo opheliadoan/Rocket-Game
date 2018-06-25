@@ -1,6 +1,4 @@
 import java.awt.*;
-//import java.awt.image.BufferedImage;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -57,7 +55,7 @@ public class Player {
 //                30, 30, null);
 
     }
- 
+
 
 //    //Ver1
 //    public int relocateXPlayer() {
