@@ -1,16 +1,13 @@
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.util.Random;
 
 public class Star {
 
     public Vector2D position;
     public BufferedImage image;
     public Vector2D velocity;
-    private Random random;
 
     public Star() {
-        this.random = new Random();
        this.position = new Vector2D();
        this.velocity = new Vector2D();
     }

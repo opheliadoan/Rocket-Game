@@ -1,29 +1,29 @@
 
+import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
 
 
-public class Enemy {
-
+public class EnemyAttack {
     public Vector2D position;
     public BufferedImage image;
     public Vector2D velocity;
 
 
-    public Enemy() {
+    public EnemyAttack() {
         this.position = new Vector2D();
         this.velocity = new Vector2D();
-
     }
 
-    public void renderEnemy(Graphics graphics) {
+    public void renderEnemyAttack(Graphics graphics) {
         graphics.drawImage(image, (int)this.position.x, (int)this.position.y,
                 20, 20, null);
-
     }
 
-    //Ver2
-    public void run() {
+    public void runAttack() {
         this.position.addUp(this.velocity);
     }
 

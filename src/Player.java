@@ -10,6 +10,7 @@ public class Player {
     private Polygon polygon;
     public Vector2D velocity;
     public double angle = 0.0;
+    public Vector2D center;
 
 
     public Player() {
@@ -30,13 +31,13 @@ public class Player {
     public void renderPlayer(Graphics graphics) {
         this.polygon.reset();
 
-        Vector2D center = this.vertices
+        this.center = this.vertices
                 .stream()
                 .reduce(new Vector2D(), (v1, v2) -> v1.add(v2))  //v1 = first element of the list, v2 moves from the second, return v1 to Vector2D
                 .multiply(1/this.vertices.size())
-                .rotate(this.angle);
+                .rotate(this.angle);;
 
-        Vector2D translation = this.position.subtract(center);
+        Vector2D translation = this.position.subtract(this.center);
 
 //        List<Vector2D> list = new ArrayList<>();
 //        this.vertices.forEach(vertex -> list.add(vertex.add(translation)));
@@ -55,6 +56,8 @@ public class Player {
 //                30, 30, null);
 
     }
+
+    
 
 
 //    //Ver1
