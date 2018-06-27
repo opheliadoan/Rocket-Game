@@ -11,6 +11,7 @@ public class Player {
     public Vector2D velocity;
     public double angle = 0.0;
     public Vector2D center;
+    public Vector2D updateCenter;
 
 
     public Player() {
@@ -57,7 +58,6 @@ public class Player {
 
     }
 
-    
 
 
 //    //Ver1
