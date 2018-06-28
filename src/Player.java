@@ -1,4 +1,5 @@
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -11,7 +12,6 @@ public class Player {
     public Vector2D velocity;
     public double angle = 0.0;
     public Vector2D center;
-    public Vector2D updateCenter;
 
 
     public Player() {
@@ -32,10 +32,13 @@ public class Player {
     public void renderPlayer(Graphics graphics) {
         this.polygon.reset();
 
+        //reduce: only for list, conduct method (add, subtract, mult, div) on the whole list; the same as for-loop
+        //.stream().reduce(store_value_here, (fValue, sValue) -> fValue + sValue)
+
         this.center = this.vertices
                 .stream()
                 .reduce(new Vector2D(), (v1, v2) -> v1.add(v2))  //v1 = first element of the list, v2 moves from the second, return v1 to Vector2D
-                .multiply(1/this.vertices.size())
+                .multiply(1.0f/(float)this.vertices.size())
                 .rotate(this.angle);;
 
         Vector2D translation = this.position.subtract(this.center);
@@ -43,6 +46,12 @@ public class Player {
 //        List<Vector2D> list = new ArrayList<>();
 //        this.vertices.forEach(vertex -> list.add(vertex.add(translation)));
         //rotate first before moving
+
+//        ArrayList<Vector2D> list = new ArrayList<>();
+//        this.vertices.forEach(vertex -> list.add(vertex.add(translation)));
+
+        //map == function
+        //This case: take in a list, return a new list
         this.vertices
                 .stream()
                 .map(vertex -> vertex.rotate(angle))
@@ -59,8 +68,7 @@ public class Player {
     }
 
 
-
-//    //Ver1
+    //    //Ver1
 //    public int relocateXPlayer() {
 //        if(this.position.x < 0) {
 //            return 1023;

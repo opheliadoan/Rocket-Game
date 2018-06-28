@@ -20,6 +20,7 @@ public class GameCanvas extends JPanel {
     ArrayList<Star> stars;
     ArrayList<Bullet> enemyBullets = new ArrayList<>();
     ArrayList<Bullet> playerBullets = new ArrayList<>();
+    ArrayList<Bullet> bullets = new ArrayList<>();
     int countBullet = 0;
 
 
@@ -85,7 +86,7 @@ public class GameCanvas extends JPanel {
     }
 
     private void setupEnemyBullet() {
-        if(this.countBullet == 70) {
+        if(this.countBullet == 10) {
             Bullet bullet = new Bullet();
             bullet.position.set((this.enemyAttack.position));
             bullet.image = this.loadImage("resources/images/circle.png");
@@ -109,6 +110,7 @@ public class GameCanvas extends JPanel {
             this.countBullet += 1;
         }
     }
+
 
 
     @Override
@@ -142,6 +144,7 @@ public class GameCanvas extends JPanel {
 
         this.setupEnemyBullet();
         this.enemyShootBullet();
+
 
         this.player.run();
 
@@ -179,9 +182,10 @@ public class GameCanvas extends JPanel {
     }
 
     private void enemyShootBullet() {
-        Vector2D velocity = this.enemyAttack.position
-                .normalize()
-                .multiply(5);
+        Vector2D velocity = new Vector2D(3f, 0);
+//        Vector2D velocity = this.enemyAttack.velocity
+//                .normalize()
+//                .multiply(5);
         this.enemyBullets.forEach(bullet -> bullet.velocity.set(velocity));
         this.enemyBullets.forEach(bullet -> bullet.run());
     }
