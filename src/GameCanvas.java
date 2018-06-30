@@ -99,7 +99,7 @@ public class GameCanvas extends JPanel {
     }
 
     private void setupPlayerBullet() {
-        if(this.countBullet == 70) {
+        if(this.countBullet == 10) {
             Bullet bullet = new Bullet();
             bullet.position.set((this.player.position));
             bullet.image = this.loadImage("resources/images/powerup_shield.png");
@@ -182,7 +182,7 @@ public class GameCanvas extends JPanel {
     }
 
     private void enemyShootBullet() {
-        Vector2D velocity = new Vector2D(3f, 0);
+        Vector2D velocity = new Vector2D(8f, 0);
 //        Vector2D velocity = this.enemyAttack.velocity
 //                .normalize()
 //                .multiply(5);
@@ -191,9 +191,10 @@ public class GameCanvas extends JPanel {
     }
 
     private void playerShootBullet() {
-        Vector2D velocity = this.player.position
-                .normalize()
-                .multiply(5);
+        Vector2D velocity = new Vector2D(8f, 0);
+//        Vector2D velocity = this.player.position
+//                .normalize()
+//                .multiply(5);
         this.playerBullets.forEach(bullet -> bullet.velocity.set(velocity));
         this.playerBullets.forEach(bullet -> bullet.run());
     }

@@ -35,11 +35,13 @@ public class Player {
         //reduce: only for list, conduct method (add, subtract, mult, div) on the whole list; the same as for-loop
         //.stream().reduce(store_value_here, (fValue, sValue) -> fValue + sValue)
 
-        this.center = this.vertices
-                .stream()
-                .reduce(new Vector2D(), (v1, v2) -> v1.add(v2))  //v1 = first element of the list, v2 moves from the second, return v1 to Vector2D
-                .multiply(1.0f/(float)this.vertices.size())
-                .rotate(this.angle);;
+        this.center = this.getCenter();
+
+//        this.center = this.vertices
+//                .stream()
+//                .reduce(new Vector2D(), (v1, v2) -> v1.add(v2))  //v1 = first element of the list, v2 moves from the second, return v1 to Vector2D
+//                .multiply(1.0f/(float)this.vertices.size())
+//                .rotate(this.angle);
 
         Vector2D translation = this.position.subtract(this.center);
 
@@ -65,6 +67,14 @@ public class Player {
 //        graphics.drawImage(image, (int)this.position.x, (int)this.position.y,
 //                30, 30, null);
 
+    }
+
+    public Vector2D getCenter() {
+        return this.vertices
+                .stream()
+                .reduce(new Vector2D(), (v1, v2) -> v1.add(v2))
+                .multiply(1.0f/(float)this.vertices.size())
+                .rotate(this.angle);
     }
 
 
