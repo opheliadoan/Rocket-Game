@@ -75,8 +75,7 @@ public class GameCanvas extends JPanel {
         if (this.countStar == 10) {
             Star star = new Star();
             star.position.set(0, (float) this.random.nextInt(600));
-            star.image = this.loadImage("resources/images/star.png");
-
+//            star.image = this.loadImage("resources/images/star.png");
             this.stars.add(star);
 
             this.countStar = 0;
@@ -120,10 +119,10 @@ public class GameCanvas extends JPanel {
 
     public void renderAll() {
         this.background.render(this.graphics);
-        this.stars.forEach(star -> star.renderStar(graphics));
+        this.stars.forEach(star -> star.render(graphics));
 
 //        this.star.renderStar(this.graphics);
-        this.player.renderPlayer(this.graphics);
+        this.player.render(this.graphics);
         this.enemy.renderEnemy(this.graphics);
 
         this.enemyAttack.renderEnemyAttack(this.graphics);
