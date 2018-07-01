@@ -1,12 +1,12 @@
 import java.awt.*;
 
-public class BulletPlayer  {
+public class BulletEnemy {
 
     public Vector2D position;
     public Renderer renderer;
     public Vector2D velocity;
 
-    public BulletPlayer() {
+    public BulletEnemy() {
         this.position = new Vector2D();
         this.velocity = new Vector2D();
         this.renderer = new ImageRenderer("resources/images/circle.png", 7, 7);

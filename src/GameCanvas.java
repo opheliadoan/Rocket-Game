@@ -84,31 +84,31 @@ public class GameCanvas extends JPanel {
         }
     }
 
-    private void setupEnemyBullet() {
-        if(this.countBullet == 10) {
-            Bullet bullet = new Bullet();
-            bullet.position.set((this.enemyAttack.position));
-            bullet.image = this.loadImage("resources/images/circle.png");
-
-            this.enemyBullets.add(bullet);
-            this.countBullet = 0;
-        } else {
-            this.countBullet += 1;
-        }
-    }
-
-    private void setupPlayerBullet() {
-        if(this.countBullet == 10) {
-            Bullet bullet = new Bullet();
-            bullet.position.set((this.player.position));
-            bullet.image = this.loadImage("resources/images/powerup_shield.png");
-
-            this.playerBullets.add(bullet);
-            this.countBullet = 0;
-        } else {
-            this.countBullet += 1;
-        }
-    }
+//    private void setupEnemyBullet() {
+//        if(this.countBullet == 10) {
+//            Bullet bullet = new Bullet();
+//            bullet.position.set((this.enemyAttack.position));
+//            bullet.image = this.loadImage("resources/images/circle.png");
+//
+//            this.enemyBullets.add(bullet);
+//            this.countBullet = 0;
+//        } else {
+//            this.countBullet += 1;
+//        }
+//    }
+//
+//    private void setupPlayerBullet() {
+//        if(this.countBullet == 10) {
+//            Bullet bullet = new Bullet();
+//            bullet.position.set((this.player.position));
+//            bullet.image = this.loadImage("resources/images/circle.png");
+//
+//            this.playerBullets.add(bullet);
+//            this.countBullet = 0;
+//        } else {
+//            this.countBullet += 1;
+//        }
+//    }
 
 
 
@@ -125,7 +125,7 @@ public class GameCanvas extends JPanel {
         this.player.render(this.graphics);
         this.enemy.renderEnemy(this.graphics);
 
-        this.enemyAttack.renderEnemyAttack(this.graphics);
+        this.enemyAttack.render(this.graphics);
 
         this.enemyBullets.forEach(bullet -> bullet.renderBullet(graphics));
         this.playerBullets.forEach(bullet -> bullet.renderBullet(graphics));
@@ -141,14 +141,14 @@ public class GameCanvas extends JPanel {
 
         this.runEnemyAttack();
 
-        this.setupEnemyBullet();
-        this.enemyShootBullet();
+//        this.setupEnemyBullet();
+//        this.enemyShootBullet();
 
 
         this.player.run();
 
-        this.setupPlayerBullet();
-        this.playerShootBullet();
+//        this.setupPlayerBullet();
+//        this.playerShootBullet();
     }
 
     private void runEnemy() {
@@ -166,7 +166,7 @@ public class GameCanvas extends JPanel {
                 .normalize()
                 .multiply(1.5f);
         this.enemyAttack.velocity.set(velocity);
-        this.enemyAttack.runAttack();
+        this.enemyAttack.run();
     }
 
 

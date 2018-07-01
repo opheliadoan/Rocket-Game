@@ -1,6 +1,6 @@
 import java.awt.*;
 
-public class Star {
+public class Star extends GameObject{
 
     public Vector2D position;
     public Renderer renderer;
