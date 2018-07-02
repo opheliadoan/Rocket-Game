@@ -1,16 +1,14 @@
 import java.awt.*;
 
-public class Player {
+public class Player extends GameObject{
 
-    public Vector2D position;
+
     public Vector2D velocity;
     public double angle = 0.0;
-    public Renderer renderer;
     public PlayerAttack playerAttack;
 
 
     public Player() {
-        this.position = new Vector2D();
         this.renderer = new PolygonRenderer(Color.RED,
                 new Vector2D(),
                 new Vector2D(0, 16),
@@ -20,7 +18,7 @@ public class Player {
     }
 
     public void run() {
-
+        super.run();
         this.position.addUp(this.velocity);
         //The object remains the same, just the type changes from Renderer to PolygonRenderer
         ((PolygonRenderer) this.renderer).angle = this.angle;
@@ -28,7 +26,7 @@ public class Player {
     }
 
     public void render(Graphics graphics) {
-        this.renderer.render(graphics, this.position);
+       super.run();
         ((PlayerShoot)this.playerAttack).bulletPlayers.forEach(bulletPlayer -> bulletPlayer.render(graphics));
     }
 }

@@ -12,7 +12,6 @@ public class GameCanvas extends JPanel {
     BufferedImage backBuffered;
     Graphics graphics;
 
-
     Background background;
 
     int countStar = 0;
@@ -20,17 +19,12 @@ public class GameCanvas extends JPanel {
     ArrayList<Star> stars;
     ArrayList<Bullet> enemyBullets = new ArrayList<>();
     ArrayList<Bullet> playerBullets = new ArrayList<>();
-    ArrayList<Bullet> bullets = new ArrayList<>();
-    int countBullet = 0;
-
 
     public Player player = new Player();
     public Enemy enemy = new Enemy();
     public EnemyAttack enemyAttack = new EnemyAttack();
 
-
     private Random random = new Random();
-
 
     public GameCanvas() {
         this.setSize(1024, 600);
@@ -74,8 +68,7 @@ public class GameCanvas extends JPanel {
     private void setupStar() {
         if (this.countStar == 10) {
             Star star = new Star();
-            star.position.set(0, (float) this.random.nextInt(600));
-//            star.image = this.loadImage("resources/images/star.png");
+            star.position.set(1024, (float) this.random.nextInt(600));
             this.stars.add(star);
 
             this.countStar = 0;
@@ -83,34 +76,6 @@ public class GameCanvas extends JPanel {
             this.countStar += 1;
         }
     }
-
-//    private void setupEnemyBullet() {
-//        if(this.countBullet == 10) {
-//            Bullet bullet = new Bullet();
-//            bullet.position.set((this.enemyAttack.position));
-//            bullet.image = this.loadImage("resources/images/circle.png");
-//
-//            this.enemyBullets.add(bullet);
-//            this.countBullet = 0;
-//        } else {
-//            this.countBullet += 1;
-//        }
-//    }
-//
-//    private void setupPlayerBullet() {
-//        if(this.countBullet == 10) {
-//            Bullet bullet = new Bullet();
-//            bullet.position.set((this.player.position));
-//            bullet.image = this.loadImage("resources/images/circle.png");
-//
-//            this.playerBullets.add(bullet);
-//            this.countBullet = 0;
-//        } else {
-//            this.countBullet += 1;
-//        }
-//    }
-
-
 
     @Override
     protected void paintComponent(Graphics g) {
@@ -141,14 +106,7 @@ public class GameCanvas extends JPanel {
 
         this.runEnemyAttack();
 
-//        this.setupEnemyBullet();
-//        this.enemyShootBullet();
-
-
         this.player.run();
-
-//        this.setupPlayerBullet();
-//        this.playerShootBullet();
     }
 
     private void runEnemy() {
@@ -169,35 +127,11 @@ public class GameCanvas extends JPanel {
         this.enemyAttack.run();
     }
 
-
     private void runStar() {
-        Vector2D velocity = new Vector2D((float)this.random.nextInt(8) + 1, 0);
+        Vector2D velocity = new Vector2D(-(float)this.random.nextInt(8) + 1, 0);
         this.stars.forEach(star -> star.velocity.set(velocity));
         this.stars.forEach(star -> star.run());
-
-//        Vector2D velocity = new Vector2D((float)this.random.nextInt(8) + 1, 0);
-//        this.star.velocity.set(velocity);
-//        this.star.run();
     }
-
-    private void enemyShootBullet() {
-        Vector2D velocity = new Vector2D(8f, 0);
-//        Vector2D velocity = this.enemyAttack.velocity
-//                .normalize()
-//                .multiply(5);
-        this.enemyBullets.forEach(bullet -> bullet.velocity.set(velocity));
-        this.enemyBullets.forEach(bullet -> bullet.run());
-    }
-
-    private void playerShootBullet() {
-        Vector2D velocity = new Vector2D(8f, 0);
-//        Vector2D velocity = this.player.position
-//                .normalize()
-//                .multiply(5);
-        this.playerBullets.forEach(bullet -> bullet.velocity.set(velocity));
-        this.playerBullets.forEach(bullet -> bullet.run());
-    }
-
 
     private BufferedImage loadImage(String path) {
         try {

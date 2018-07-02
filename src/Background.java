@@ -1,8 +1,15 @@
 import java.awt.*;
 
 public class Background {
+
+    public Vector2D position;
+    public Renderer renderer;
+
+    public Background() {
+        this.position = new Vector2D();
+        this.renderer = new BackgroundRenderer(Color.BLACK, 1024, 600);
+    }
     public void render(Graphics graphics) {
-        graphics.setColor(Color.BLACK);
-        graphics.fillRect(0, 0, 1024, 600);
+       this.renderer.render(graphics, this.position);
     }
 }
