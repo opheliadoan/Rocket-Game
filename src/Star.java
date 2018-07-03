@@ -9,11 +9,6 @@ public class Star extends GameObject{
         this.renderer = new ImageRenderer("resources/images/star.png", 5, 5);
     }
 
-    //Father Class already has it
-//    public void render(Graphics graphics) {
-//        this.renderer.render(graphics, this.position);
-//    }
-
     @Override
     public void run() {
         //Run father method

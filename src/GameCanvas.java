@@ -14,7 +14,6 @@ public class GameCanvas extends JPanel {
     Graphics graphics;
 
     int countStar = 0;
-
     List<Star> stars;
 
     Background background;
@@ -79,8 +78,8 @@ public class GameCanvas extends JPanel {
     private void createStar() {
         if (this.countStar == 30) {
             Star star = new Star();
-            star.position.set(1024, this.random.nextInt(600));
-            star.velocity.set(-this.random.nextInt(3) + 1, 0);
+            star.position.set(1023, this.random.nextInt(600));
+            star.velocity.set(-this.random.nextInt(5) + 1, 0);
             this.stars.add(star);
             this.countStar = 0;
         } else {
@@ -97,11 +96,4 @@ public class GameCanvas extends JPanel {
         this.enemy.run();
     }
 
-    private BufferedImage loadImage(String path) {
-        try {
-            return ImageIO.read(new File(path));
-        } catch (IOException e) {
-            return null;
-        }
-    }
 }
