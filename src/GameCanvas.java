@@ -1,27 +1,19 @@
-import javax.imageio.ImageIO;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
 
 public class GameCanvas extends JPanel {
 
     BufferedImage backBuffered;
     Graphics graphics;
 
-    int countStar = 0;
-    List<Star> stars;
+    public CreatStar creatStar = new CreatStar();
 
     Background background;
 
     public Player player = new Player();
     public Enemy enemy = new Enemy();
-
-    private Random random = new Random();
 
 
     public GameCanvas() {
@@ -41,7 +33,6 @@ public class GameCanvas extends JPanel {
 
     private void setupCharacter() {
         this.background = new Background();
-        this.stars = new ArrayList<>();
         this.setupPlayer();
         this.setupEnemy();
     }
@@ -61,7 +52,7 @@ public class GameCanvas extends JPanel {
 
     public void renderAll() {
         this.background.render(this.graphics);
-        this.stars.forEach(star -> star.render(graphics));
+        this.creatStar.stars.forEach(star -> star.render(this.graphics));
         this.player.render(this.graphics);
         this.enemy.render(this.graphics);
 
@@ -69,22 +60,9 @@ public class GameCanvas extends JPanel {
     }
 
     public void runAll() {
-        this.createStar();
-        this.stars.forEach(star -> star.run());
+        this.creatStar.run();
         this.runEnemy();
         this.player.run();
-    }
-
-    private void createStar() {
-        if (this.countStar == 30) {
-            Star star = new Star();
-            star.position.set(1023, this.random.nextInt(600));
-            star.velocity.set(-this.random.nextInt(5) + 1, 0);
-            this.stars.add(star);
-            this.countStar = 0;
-        } else {
-            this.countStar += 1;
-        }
     }
 
     private void runEnemy() {
@@ -95,5 +73,4 @@ public class GameCanvas extends JPanel {
         this.enemy.velocity.set(velocity);
         this.enemy.run();
     }
-
 }
