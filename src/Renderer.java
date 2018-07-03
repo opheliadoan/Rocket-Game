@@ -1,5 +1,4 @@
 import java.awt.*;
-import java.util.List;
 
 public interface Renderer {
 
