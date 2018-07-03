@@ -2,12 +2,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class CreatStar {
+public class CreateStar {
     public List<Star> stars;
     private Random random;
     private int countStar;
 
-    public CreatStar() {
+    public CreateStar() {
         this.stars = new ArrayList<>();
         this.random = new Random();
     }

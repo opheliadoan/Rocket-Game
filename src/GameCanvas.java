@@ -8,7 +8,7 @@ public class GameCanvas extends JPanel {
     BufferedImage backBuffered;
     Graphics graphics;
 
-    public CreatStar creatStar = new CreatStar();
+    public CreateStar creatStar = new CreateStar();
 
     Background background;
 
