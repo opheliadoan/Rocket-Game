@@ -8,7 +8,8 @@ public class GameCanvas extends JPanel {
     BufferedImage backBuffered;
     Graphics graphics;
 
-    public CreateStar creatStar = new CreateStar();
+    public CreateStar createStar = new CreateStar();
+    public RunEnemy runEnemy = new RunEnemy();
 
     Background background;
 
@@ -42,7 +43,8 @@ public class GameCanvas extends JPanel {
     }
 
     private void setupEnemy() {
-        this.enemy.position.set(800, 400);
+        this.runEnemy.enemy.position.set(800, 400);
+        this.enemy.position.set(500, 200);
     }
 
     @Override
@@ -52,25 +54,34 @@ public class GameCanvas extends JPanel {
 
     public void renderAll() {
         this.background.render(this.graphics);
-        this.creatStar.stars.forEach(star -> star.render(this.graphics));
+        this.createStar.stars.forEach(star -> star.render(this.graphics));
         this.player.render(this.graphics);
         this.enemy.render(this.graphics);
+        this.runEnemy.enemy.render(this.graphics);
+        ((EnemyShoot)this.runEnemy.enemyAttack).bulletEnemies.forEach(bulletEnemy -> bulletEnemy.render(this.graphics));
 
         this.repaint();
     }
 
     public void runAll() {
-        this.creatStar.run();
+        this.createStar.run();
         this.runEnemy();
         this.player.run();
     }
 
     private void runEnemy() {
-        Vector2D velocity = this.player.position
-                .subtract(this.enemy.position)
+        Vector2D velocity1 = this.player.position
+                .subtract(this.runEnemy.enemy.position)
                 .normalize()
                 .multiply(1.5f);
-        this.enemy.velocity.set(velocity);
+        this.runEnemy.enemy.velocity.set(velocity1);
+        this.runEnemy.run();
+
+        Vector2D velocity2 = this.player.position
+                .subtract(this.enemy.position)
+                .normalize()
+                .multiply(2.2f);
+        this.enemy.velocity.set(velocity2);
         this.enemy.run();
     }
 }
