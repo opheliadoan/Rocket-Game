@@ -1,6 +1,6 @@
 import java.util.Random;
 
-public class RunEnemy {
+public class RunEnemy extends GameObject{
     public Enemy enemy;
     public EnemyAttack enemyAttack;
     private Random random;
@@ -12,6 +12,7 @@ public class RunEnemy {
     }
 
     public void run() {
+        super.run();
         this.enemy.run();
         this.enemyAttack.run(this.enemy);
         this.backtoScreen();

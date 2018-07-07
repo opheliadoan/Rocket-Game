@@ -1,28 +1,26 @@
-import java.util.ArrayList;
-import java.util.List;
+
 import java.util.Random;
 
-public class CreateStar{
-    public List<Star> stars;
+public class CreateStar extends GameObject {
     private Random random;
-    private int countStar;
+    private FrameCounter frameCounter;
 
     public CreateStar() {
-        this.stars = new ArrayList<>();
+
+        this.frameCounter = new FrameCounter(10);
         this.random = new Random();
     }
 
+    @Override
     public void run() {
-        if (countStar == 10) {
+        super.run();
+        if (this.frameCounter.run()) {
             Star star = new Star();
             star.position.set(1023, (float)random.nextInt(600));
             star.velocity.set(-(this.random.nextInt(5)+1), 0);
-            this.stars.add(star);
-            this.countStar = 0;
-        } else {
-            this.countStar += 1;
-        }
+            GameObjectManager.instance.add(star);
 
-        this.stars.forEach(star -> star.run());
+            this.frameCounter.reset();
+        }
     }
 }

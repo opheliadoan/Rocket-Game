@@ -1,6 +1,7 @@
 import java.awt.*;
 
 public class BackgroundRenderer implements Renderer {
+
     private Color color;
     private int width;
     private int height;
@@ -14,6 +15,6 @@ public class BackgroundRenderer implements Renderer {
     @Override
     public void render(Graphics graphics, Vector2D position) {
         graphics.setColor(this.color);
-        graphics.fillRect((int)position.x, (int)position.y, width, height);
+        graphics.fillRect((int) position.x, (int) position.y, this.width, this.height);
     }
 }
