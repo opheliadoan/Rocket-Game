@@ -1,3 +1,8 @@
+import Base.GameObjectManager;
+import GameCharacter.Background.Background;
+import CreateStar;
+import GameCharacter.Player.Player;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -29,15 +34,14 @@ public class GameCanvas extends JPanel {
         GameObjectManager.instance.add(new Background());
         GameObjectManager.instance.add(new CreateStar());
         this.setupPlayer();
+
     }
 
     private void setupPlayer() {
         Player player = new Player();
         player.position.set(100, 200);
-        GameObjectManager.instance.add(new RunPlayer(player));
+        GameObjectManager.instance.add(player);
     }
-
-
 
     @Override
     protected void paintComponent(Graphics g) {
@@ -54,7 +58,7 @@ public class GameCanvas extends JPanel {
     }
 
     private void runEnemy() {
-//        Vector2D velocity = this.player.position
+//        Base.Vector2D velocity = this.player.position
 //                .subtract(this.enemy.position)
 //                .normalize()
 //                .multiply(1.5f);

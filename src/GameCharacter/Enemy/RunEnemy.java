@@ -1,6 +1,13 @@
+package GameCharacter.Enemy;
+
+import Base.GameObject;
+import GameCharacter.Enemy.Enemy;
+import GameCharacter.Enemy.EnemyAttack;
+import GameCharacter.Enemy.EnemyShoot;
+
 import java.util.Random;
 
-public class RunEnemy extends GameObject{
+public class RunEnemy extends GameObject {
     public Enemy enemy;
     public EnemyAttack enemyAttack;
     private Random random;

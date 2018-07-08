@@ -1,3 +1,8 @@
+package GameCharacter.Enemy;
+
+import Base.FrameCounter;
+import Base.Vector2D;
+
 import java.util.ArrayList;
 import java.util.List;
 

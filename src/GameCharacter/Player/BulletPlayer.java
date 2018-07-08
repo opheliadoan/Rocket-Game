@@ -1,9 +1,14 @@
+package GameCharacter.Player;
 
-public class BulletEnemy extends GameObject{
+import Base.GameObject;
+import Base.Vector2D;
+import Renderer.ImageRenderer;
+
+public class BulletPlayer extends GameObject {
 
     public Vector2D velocity;
 
-    public BulletEnemy() {
+    public BulletPlayer() {
         this.velocity = new Vector2D();
         this.renderer = new ImageRenderer("resources/images/circle.png", 7, 7);
     }

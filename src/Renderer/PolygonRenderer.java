@@ -1,3 +1,7 @@
+package Renderer;
+
+import Base.Vector2D;
+
 import java.awt.*;
 import java.util.Arrays;
 import java.util.List;

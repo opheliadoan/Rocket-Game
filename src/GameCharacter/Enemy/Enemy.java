@@ -1,3 +1,11 @@
+package GameCharacter.Enemy;
+
+import Base.GameObject;
+import Base.GameObjectManager;
+import Base.Vector2D;
+import GameCharacter.Player.Player;
+import Renderer.ImageRenderer;
+
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,10 +27,10 @@ public class Enemy extends GameObject {
         super.run();
 //        if (this.count == 30) {
 //            for (double angle = 0.0; angle < 360.0; angle += 360.0 / 10.0) {
-//                BulletEnemy bulletEnemy = new BulletEnemy();
+//                GameCharacter.Enemy.Enemy.BulletEnemy bulletEnemy = new GameCharacter.Enemy.Enemy.BulletEnemy();
 //                bulletEnemy.position.set(this.position);
 //                bulletEnemy.velocity.set(
-//                        (new Vector2D(3.0f, 0.0f)).rotate(angle)
+//                        (new Base.Vector2D(3.0f, 0.0f)).rotate(angle)
 //                );
 //                this.bulletEnemies.add(bulletEnemy);
 //            }

@@ -1,9 +1,9 @@
-import javax.imageio.ImageIO;
+package Input;
+
+import Base.Vector2D;
+
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
 
 
 public class Bullet {

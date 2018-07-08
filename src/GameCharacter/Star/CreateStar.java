@@ -1,3 +1,8 @@
+package GameCharacter.Star;
+
+import Base.FrameCounter;
+import Base.GameObject;
+import Base.GameObjectManager;
 
 import java.util.Random;
 

@@ -1,5 +1,10 @@
+package GameCharacter.Star;
 
-public class Star extends GameObject{
+import Base.GameObject;
+import Base.Vector2D;
+import Renderer.ImageRenderer;
+
+public class Star extends GameObject {
 
     public Vector2D velocity;
 

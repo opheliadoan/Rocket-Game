@@ -1,10 +1,14 @@
+package Renderer;
+
+import Base.Vector2D;
+
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
-public class ImageRenderer implements Renderer{
+public class ImageRenderer implements Renderer {
 
     private BufferedImage image;
     private int width;

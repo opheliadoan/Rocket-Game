@@ -1,3 +1,7 @@
+package Base;
+
+import GameCharacter.Player.Player;
+
 import java.awt.*;
 import java.util.ArrayList;
 
