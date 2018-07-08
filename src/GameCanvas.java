@@ -1,7 +1,8 @@
 import Base.GameObjectManager;
 import GameCharacter.Background.Background;
-import CreateStar;
+import GameCharacter.Enemy.Enemy;
 import GameCharacter.Player.Player;
+import GameCharacter.Star.CreateStar;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,6 +14,7 @@ public class GameCanvas extends JPanel {
     Graphics graphics;
 
     public Player player = new Player();
+    public Enemy enemy = new Enemy();
 
     public GameCanvas() {
 
@@ -34,7 +36,7 @@ public class GameCanvas extends JPanel {
         GameObjectManager.instance.add(new Background());
         GameObjectManager.instance.add(new CreateStar());
         this.setupPlayer();
-
+        this.runEnemy();
     }
 
     private void setupPlayer() {
@@ -58,11 +60,11 @@ public class GameCanvas extends JPanel {
     }
 
     private void runEnemy() {
-//        Base.Vector2D velocity = this.player.position
-//                .subtract(this.enemy.position)
-//                .normalize()
-//                .multiply(1.5f);
-//        this.enemy.velocity.set(velocity);
-//        this.enemy.run();
+        Base.Vector2D velocity = this.player.position
+                .subtract(this.enemy.position)
+                .normalize()
+                .multiply(1.5f);
+        this.enemy.velocity.set(velocity);
+        GameObjectManager.instance.add(enemy);
     }
 }

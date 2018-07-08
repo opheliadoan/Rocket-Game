@@ -5,6 +5,7 @@ import Base.GameObjectManager;
 import Base.Vector2D;
 import GameCharacter.Player.Player;
 import Renderer.ImageRenderer;
+import physics.BoxCollider;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -14,12 +15,13 @@ public class Enemy extends GameObject {
 
     public Vector2D velocity;
     private List<BulletEnemy> bulletEnemies;
-    private int count = 0;
+    public BoxCollider boxCollider;
 
     public Enemy() {
         this.velocity = new Vector2D();
         this.bulletEnemies = new ArrayList<>();
         this.renderer = new ImageRenderer("resources/images/circle.png", 20, 20);
+        this.boxCollider = new BoxCollider(20, 20);
     }
 
     @Override
@@ -47,7 +49,8 @@ public class Enemy extends GameObject {
             this.velocity.set(velocity);
         }
         this.position.addUp(this.velocity);
-//        this.bulletEnemies.forEach(bulletEnemy -> bulletEnemy.run());
+        this.boxCollider.position.set(this.position.x - 10, this.position.y - 10);
+        this.bulletEnemies.forEach(bulletEnemy -> bulletEnemy.run());
 
     }
 

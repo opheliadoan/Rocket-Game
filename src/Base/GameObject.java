@@ -12,10 +12,12 @@ public class GameObject {
     public Vector2D position;
     public Renderer renderer;
     public List<GameObjectAttributes> attributes;
+    public boolean isAlive;
 
     public GameObject() {
         this.position = new Vector2D();
         this.attributes = new ArrayList<>();
+        this.isAlive = true;
     }
 
     public void run() {
